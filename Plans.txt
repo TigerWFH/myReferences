@@ -1,0 +1,14 @@
+2016.4.14  开始学习计划
+    Backlog:深入学习AngularJs和Ionic                     TigerWFH 4.14
+    
+    Selected:深入学习AngularJs，并完成Day Tasks           TigerWFH 4.14
+    
+    Develop:                                           
+            Ongoing：AngularJs入门Demo以及指令学习        TigerWFH 4.14
+            
+            Done： （给出对应的Demo文件）                                      
+    
+    Deploy:
+           (写出学习时间、知识点)                         
+    Live:  (总结)       
+    
