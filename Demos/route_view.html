@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html ng-app='myApp'>
+    <head>
+        <meta charset="utf-8" >
+        <style>
+        </style>
+        <script src="bower_components/angular/angular.min.js"></script>
+        <script src="bower_components/angular-route/angular-route.min.js"></script>
+    </head>
+    <body>
+        <!--<div ng-controller="myTest">
+            <input type='text' ng-model="message" />
+            <h2>Hello {{message}}</h2>
+            <div my-first my-url='http://www.baidu.com' my-link='Click Me' my-message='{{message}}'></div>
+        </div>-->
+        <div ng-view>
+            
+        </div>
+        <script>
+            var app = angular.module('myApp', ['ngRoute']);
+            app.config(function ($routeProvider){
+                $routeProvider
+                .when('/', {
+                    templateUrl: 'first.html',
+                    controller: 'firstController'
+                })
+                .when('/second', {
+                    templateUrl: 'second.html',
+                    controller: 'secondController'
+                })
+                .when('/error', {
+                    templateUrl: 'error.html',
+                    // controller: 
+                })
+                .otherwise({
+                    redirectTo: '/error'
+                });
+            });
+            
+            app.controller('firstController', function ($scope){
+                
+            });
+            app.controller('secondController', function ($scope){
+                
+            });
+        </script>
+    </body>
+</html>

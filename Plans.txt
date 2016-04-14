@@ -4,11 +4,20 @@
     Selected:深入学习AngularJs，并完成Day Tasks           TigerWFH 4.14
     
     Develop:                                           
-            Ongoing：AngularJs入门Demo以及指令学习        TigerWFH 4.14
+            Ongoing：AngularJS中的多重视图和路由           TigerWFH 4.14
             
-            Done： （给出对应的Demo文件）                                      
+            Done： route_view.html                                    
     
     Deploy:
-           (写出学习时间、知识点)                         
-    Live:  (总结)       
+           1、使用bower安装angular-route模块，并引入目标文件中
+           2、布局模板和视图：AngularJs会根据路由自动将对应的视图加载的布局模板并在布局模板中显示视图
+           3、ngview指令：由ngRoute模块提供，作用是在HTML中给$route对应的视图内容占位。
+           4、路由函数when和otherwise：when指定路由和模板等内容；otherwise设定默认路由。
+           5、$routeParams接受URL中的参数
+           6、$location服务：解析地址栏的URL，并提供对应功能。
+           7、路由的两种模式：标签模式和HTML5模式
+           8、路由事件：$routeChangeStart,$routeChangeSuccess, $routeChangeError,$routeUpdate                       
+    Live:  初步了解了多视图与路由的知识，能够正确的将试图导入到布局模板中，建立正确的对应关系。可以进一步探索其他的未使用功能。
+                                            TigerWFH 4.14
+      
     
