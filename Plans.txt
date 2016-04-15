@@ -19,5 +19,41 @@
            8、路由事件：$routeChangeStart,$routeChangeSuccess, $routeChangeError,$routeUpdate                       
     Live:  初步了解了多视图与路由的知识，能够正确的将试图导入到布局模板中，建立正确的对应关系。可以进一步探索其他的未使用功能。
                                             TigerWFH 4.14
+     4.15
+     Develop:
+            Ongoing: 依赖注入
+            Done:
+     Deploy:
+            一个对象通常有3种方式可以获得它所依赖对象的控制权：
+                1、在对象内部创建依赖对象（作用域隔离变得异常困难）
+                2、通过全局变量引用依赖对象（会污染全局作用域）
+                3、在需要的地方通过参数进行传递（用的时候再创建）
+            本节的依赖注入就是通过第三种方式实现的。依赖注入是一种设计模式，可以去除依赖关系的硬编码，从而可以在运行时改变甚至移除依赖关系。
+            对于DI容器来说，必需具备三点：服务的注册、依赖关系的声明、对象的获取。
+            在AngularJs中，module和$provide相当于服务的注册，注册到injector中；Angular.module()创建、获取、注册angular中的模块。$provide提供了provide()、constant()、value()、factory()、service()来创建各种不同的服务。
+            
+            injector用来获取对象（angularjs会自动完成依赖的注入）；
+            依赖关系的声明在AngularJs中有3种方式。
+            AngularJs使用$injector（注入器服务）来管理依赖关系的查询和实例化。事实上，$injector负责实例化AngularJs中所有的组件，包括应用的模块、
+            指令和控制器等。在运行时，任何模块启动时$injector都会负责实例化，并将其需要的所有依赖传递进去。
+            当编写控制器时，如果没有使用[]标记或者进行显式声明，$injector就会尝试通过参数名推断依赖关系。
+            1、推断式注入声明
+                （重点重点）没有显式声明，AngularJs会假定参数名就是依赖名称，自行判断。（所以代码中总是看到参数名不能自行命名）
+            2、显式注入声明
+                函数的$injector属性来实现，这是一个数组。
+            3、行内注入声明
+                传入参数数组而不是函数。
+                angular.modul('myApp')
+                       .controller('MyController',['$scope','greeter',function(){}]);
+            注入器的API:
+                1、annotate():返回一组服务名称。
+                2、get():返回一个服务的实例。
+                3、has():返回布尔值。true:有对应服务；false：没有指定的服务。
+                4、instantiate():创建JS类型的实例，通过new。
+                5、invoke():调用一个方法，并通过$injector传递对应函数参数
+            认识ngMin.
+     Live:
+         初步了解了注入器服务，但仍然有迷惑，对程序的构建，服务的注入过程任然不是太清晰，需要进一步的学习探究。
+                                                                TigerWFH
       
     
