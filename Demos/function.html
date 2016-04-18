@@ -1,0 +1,41 @@
+<!--apply()和call()函数属性的方法，length（命名参数个数）和prototype（指向原型对象）函数的属性-->
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>JSON对象的解析方法</title>
+    </head>
+    <body>
+        <h1>JSON数据解析的三种方法</h1>
+        <script>
+            // 一、使用方法
+           function Person(){
+               this.name = "TigerWFH";
+               this.sayName = function (){
+                   alert(this.name);
+               };
+           };
+           function Student(){
+               this.name = "TigerWFH1";
+           };
+           var per = new Person;
+           per.sayName();//TigerWFH
+           var stu = new Student;
+        //    per.sayName().apply(stu);//错误的表示，相当于调用了函数而不是替换
+           per.sayName.apply(stu);//TigerWFH1
+           per.sayName.call(stu);//TigerWFH1
+        //    二、使用技巧
+        //    var arr1 = new Array(3);//创建一个包含3个数据的数组
+        //    var arr1 = new Array(1，2，);这样推荐会创建一个包含2项或3项的数组，IE和其他浏览器表现不一致
+        // var arr1 = new Array("TigerWFH", "age", "name");//可以
+        // var arr1 = [];//可以
+           var arr1 = new Array("TigerWFH",2,"name");//创建一个包含TigerWFH的一个元素的数组
+           alert(arr1[0]);
+           alert(arr1.toString());
+           var arr2 = new Array("2345", "TigerWFH");
+           alert(arr2.toString());
+           arr1.push.apply(arr1, arr2);
+           alert(arr1.toString());
+        </script>
+    </body>
+</html>
