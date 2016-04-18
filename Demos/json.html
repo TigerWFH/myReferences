@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>JSON对象的解析方法</title>
+    </head>
+    <body>
+        <h1>JSON数据解析的三种方法</h1>
+        <script>
+            //json字符串
+            var jsondata = '{"name":"TigerWFH", "age":14, "Sex":"B", "id":411411}';
+            // 一、内置的JSON对象解析
+            var jsonObj1 = JSON.parse(jsondata);
+            alert(jsonObj1);//Object
+            alert(jsonObj1.name);//TigerWFH
+            //  二、使用eval()函数解析，eval()函数执行参数中的JS代码，加（）强制运算，防止将{}识别为结束快。
+            //     因为eval()执行JS代码，所以存在很大的安全隐患，一般不建议使用
+            var jsonObj2 = eval('(' + jsondata + ')');
+            alert(jsonObj2);//Object
+            alert(jsonObj2.name);//TigerWFH
+            //  三、使用new Function()函数
+            //      Function内置构造函数，将传入的字符串作为函数体处理，性能和function声明一样
+            var jsonObj3 = new Function("return" + jsondata)();
+            alert(jsonObj3);//Object
+            alert(jsonObj3.name);//TigerWFH
+            
+            
+            // 在JS中，JSON对象和JS对象是一样的，操作也一样。JSON操作实际是针对JSON字符串和JSON对象（JS对象的）
+            //JSON语法
+            var jsonObj = {"name":"TigerWFH", "age":14, "Sex":"B", "id":411411};
+            alert(jsonObj.name + "\n" + jsonObj.age + "\n" +jsonObj.id);//TigerWFH,14,411411
+            alert(jsonObj);//Object
+            var jsonText = JSON.stringify(jsonObj);
+             alert(jsonText);//{"name":"TigerWFH", "age":14, "Sex":"B", "id":411411}
+             alert(typeof jsonText);//string
+            //JS语法
+            var jsObj = {name:"TigerWFH", age:14, Sex:"B", id:411411};
+            alert(jsObj.name + "\n" + jsObj.age + "\n" +jsObj.id);//TigerWFH,14,411411
+            alert(jsObj);//Object
+            var jsText = JSON.stringify(jsObj);
+            alert(jsText);//{"name":"TigerWFH", "age":14, "Sex":"B", "id":411411}
+            alert(typeof jsText);//string
+            if (jsText === jsonText){//true
+                alert(true);
+            }
+            else{
+                alert(false);
+            }
+            // alert(jsont);
+           
+            // end_test1  结论：1、在JS代码中，表示JSON使用JSON字符串，也就是在JSON（JS）对象上加引号；
+            //                 2、JS代码中按照JSON语法或者JS语法写的对象，都可以直接使用
+            //                 3、也就是说，JSON操作的是JSON字符号和JSON（JS）对象
+        </script>
+    </body>
+</html>
