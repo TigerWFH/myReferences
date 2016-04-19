@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Phone meta中设置的资料</title>
+    </head>
+    <body>
+        <h1>meta</h1>
+        <script>
+        //   http-equiv="Content-Security-Policy" content="default-src 'self' data: gap:https://ssl.gstatic.com 'unsafe-eval';
+        //                                                 style-src 'self' 'unsafe-inline';
+        //                                                 media-src *;
+        //                                                 connect-src 'self' http://180.153.148.73.91"
+        //  meta:提供有关页面的元信息(meta-information),比如针对搜索引擎和更新频度的描述和关键词。
+        //       属性：content  定义和http-equiv或name属性相关的元信息
+        //    可选属性：http-equiv  把content属性关联到HTTP头部，可取值：content-type:;expires:;refresh:;set-cookie:;
+        //                        服务器会把键值对添加到发送给浏览器的内容头部。
+        //            name        把content属性关联到一个名称，可取值：author:;description:;keywords:用于搜索引擎;generator:;revised:;others:;
+        //                        如果没有name,默认全部使用http-equiv
+        //            scheme      定义用于翻译content属性值的格式    可取值:sometext
+        
+           
+        //  format-detection:格式检测，用来检测html里的一些格式
+        //  <meta name="format-detection" content="telephone=no">
+        //  <meta name="format-detection" content="email=no">
+        //  <meta name="format-detection" content="address=no">
+        //  如果不这样设置，iPhone手机会自动将一串数字识别为手机号，点击会自动拨号。telephone=no就禁止了把数字转化为拨号连接
+        //  email同样的作用；address=no禁止跳转地图；
+        
+        // viewport视口大小
+        </script>
+    </body>
+</html>
