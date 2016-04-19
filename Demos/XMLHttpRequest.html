@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>XMLHttpRequest匹配</title>
+    </head>
+    <body>
+        <h1>XMLHttpRequest匹配</h1>
+        <script>
+           // 
+           //早期的IE版本拥有自己的XHR对象，就是MSXML库中的ActiveX对象实现的。有三种，MSXML2.XMLHttp、MSXML2.XMLHttp.3.0和MSXML2.XMLHttp.6.0
+           //使用XHR
+           //一、open(method, url, bAsync)函数，启动请求以备发送
+           //二、send(para)函数，发送请求到服务器
+           //数据会自动填充XHR对象的属性
+           //responseText:作为响应主题返回的文本
+           //responseXML:根据相应内容类型，保存的是XML DOM文档;对于非XML数据，该值为null
+           //status:响应的HTTP状态
+           //statusText:HTTP状态说明
+           //readyState:表示请求/响应过程的当前活动阶段。0：未初始化；1：启动，以调用open();2：发送：调用send();3:接收，已经收到部分数据;4:完成，客户端可以调用。每一次改变，都会触发一次readystatechange事件。
+           var xhr = createXHR();
+           xhr.onreadystatechange = function (){
+               if (xhr.readyState == 4){
+                   if ((xhr.status >= 200 && xhr.status <300) || xhr.status == 304){
+                       alert(xhr.responseText);
+                   }
+                   else{
+                       alert("wrong");
+                   }
+               }
+           };
+           xhr.open('get', 'url', true);
+           xhr.send(null);
+           //接到响应后，首先，检测status属性，确定响应已经成功返回(200);此时responseText属性内容已经填充完毕。如果类型正确，responseXML也可以正确访问。
+           //                              (304)内容为更改，可以使用浏览器缓存的版本。更有效的检测方法是：xhr.status >= 200 && xhr.status <300 || xhr.status == 304
+           //                              要检测状态status，不要依赖statusText
+           //          其次，
+           function createXHR (){
+               if (typeof XMLHttpRequest != 'undefined'){
+                   return new XMLHttpRequest();
+               }
+               else if (typeof arguments.callee.activeXString != 'string'){
+                    var versions = ['MSXML2.XMLHttp.6.0', 'MSXML2.XMLHttp.3.0', 'MSXML2.XMLHttp'];
+                    var i,len;
+                    for (i=0,len=versions.length;i>len;i++){
+                        try {
+                            new ActiveXObject(versions[i]);
+                            arguments.callee.activeXString = versions[i];
+                            break;
+                        }
+                        catch (exception){
+                           
+                        }
+                    }
+                }
+                return new ActiveXObject(arguments.callee.activeXString);
+           }
+           else {
+               
+           }
+        //            参考：http://bbs.csdn.net/topics/390716390
+        //                 http://www.cnblogs.com/rainman/archive/2011/02/20/1959325.html 
+        //  总结：
+        //      传统的web安全主要是同源策略(same origin policy);新的防御方式:内容安全策略(Content Security Policy)。
+        //      什么是域？  答：同域名（IP）、端口、协议视为同一个域。 
+        //      同源策略：一个域内的脚本仅仅具有本域内的权限。也就是说本域脚本只能读写本域内的资源，而无法访问其他域内的资源。
+        //               同源策略是针对JS代码能够和哪些web内容交互的一条完整的安全限制，针对的是JS的权限问题。
+        //     
+        //      触发同源策略的场景：夸frame脚本、夸window脚本、cookie访问、XMLHttpRequest请求（不是很理解）。
+        //      能够自动跨域的标签:<script>、<img>、<iframe>、<link>等标签。这些带有src属性的标签每次加载，实际上就是由浏览器发起了一个get请求。通过src加载的资源，浏览器限制了
+        //                      JavaScript的权限，使其不能够读写返回的内容。这一点和XMLHttpRequest请求不一样。
+        //      为什么需要同源策略：
+        //                      假设没有同源策略。现有有2个站点A：www.icbc.com和B:www.change.com。假如在B站点放上钓鱼内容，并提供A站点的第三方链接。当用户通过B站点的链接（可以使用window.open()函数直接打开并获取该页面的句柄）进入
+        //                      A站点时，用户看到地址栏是icbc的地址，就会填入对应的私人信息（银行卡账户和密码），然而B站点此时就可以通过窗口句柄（实际就是window对象）控制该页面，拦截表单，捕获数据，将账号密码发送到钓鱼网站的后端
+        //                     （此时B站JS可以通过window对象操作A站的index页面的）......从此上网只能直接输入域名了，第三方链接神马的有人敢点？你只是open了我的页面而已，结果你可以篡改我的前端内容了。如果两个tab是独立的，则还是安全的。
+        //                      ajax被同源策略限制的原因？
+        //                                  http是无状态的协议，现代很多web应用的身份验证都是通过cookie来维持的，于是就催生了session的概念。session必然有id，用来标识当前用户的本次会话。session id一般都会存储在cookie中。而
+        //                                  cookie的特性是，每次http请求都会带到服务器上，这样服务器就可以从中取出来sessionID，会话得以保持。
+        //                                  再说ajax，其本身就是http请求，自然也会带上cookie，否则程序员无法写出类似ajaxUserInfo的功能。这里问题就来了，如果a.com页面上的js脚本向b.com域发起一个跨域ajax请求，
+        //                                  那么，你说浏览器会带上那个域cookie呢？自然是b.com域下的！问题来了，既然带的是b.com的cookie，那么认证什么的，自然是看b.com的cookie有什么。如果恰巧用户此时正在浏览b.com而且登陆了，
+        //                                  那么a.com就可以顺顺利利得到b.com返回的内容了，只要进一步挖掘b.com的接口，a.com可以想干啥就干啥了。
+        //                                  另一个例子：假如获得CSDN发帖的API，那么我就可以写一个ajax并调用此API并循环100亿次，那CSDN就挂掉了。
+        //    ajax跨域解决方案：一、使用W3C推荐的自定义HTTP头：ORIGIN：
+        
+        //    内容安全策略：这是HTML5种一套全新主动防御的体系。CSP定义了Content-Security-Policy HTTP头来为你的内容创建一个来源的白名单。浏览器只允许白名单域里的资源和代码执行。
+        //               ***** 主要用来定义当前页面可以加载哪些资源，减少XSS（跨站脚本攻击）的发生。*****
+        
+        //
+        // 通过XHR实现Ajax通信的一个主要限制就是跨域安全策略。默认情况下，XHR对象只能访问与包含它的页面位于同一个域中的资源。
+        // CORS(Cross-Origin Resource Sharing)跨源资源共享。基本思想是：使用自定义的HTTP头部让浏览器与服务器进行沟通，从而决定请求或响应是成功还是失败。
+        //     eg:    Origin:http://www.myself.com当服务器接收该请求时，就在Access-Control-Allow-Origin头部回发相同源信息（如果是公共资源，发送*）。
+        //     eg:    Access-Control-Allow-Origin:http:www.myself.com
+        </script>
+    </body>
+</html>
