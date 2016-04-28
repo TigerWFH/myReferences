@@ -1,4 +1,4 @@
-1、看板资料，可以用来规划项目进度
+﻿1、看板资料，可以用来规划项目进度
    http://www.jianshu.com/p/e44b1038c9cf
 2、工程师文化
    https://www.ustack.com/blog/unitedstack-engineer-value/
@@ -10,3 +10,5 @@
    https://icomoon.io
 5、ionic中文社区
    http://ionichina.com/?tab=all&page=2
+6、前后端分离的思考（有助于了解前端）
+   http://ued.taobao.org/blog/2014/04/xtpl/

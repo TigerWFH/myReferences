@@ -1,0 +1,10 @@
+mysql安装出现问题：
+     MySql服务无法启动	
+     服务没有报告任何错误
+     
+网上找了各种办法，都无效。
+解决方案：
+        mysqld remove
+        mysqld install
+        mysqld initialize-insecure
+然后服务可以正常启动
