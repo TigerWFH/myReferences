@@ -8,3 +8,13 @@
 解决方案：
 	1、仅使用button类和自定义类即可
 	2、使用icon-off和icon-on添加自定义的类即可
+
+
+问题描述：
+	1、使用ion-nav-bar过程中出现了每一个页面显示的都是第一个页面的button按钮现象。
+	2、第一个view-title不设置的话，会引入后面页面的view-title，造成页面显示错误。
+探索过程：
+	在探索过程中，将ion-nav-bar写入到每一个模板中，问题任然存在；将ion-nav-bar写到index中，给每一个页面添加ion-nav-buttons，问题仍然存在。
+解决方案：
+	1、为每一个页面添加控制器，就可以解决该问题。
+	2、为了不显示其他页面的view-title，可以将本页面的title-view设置为空字符串。
