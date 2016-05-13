@@ -18,3 +18,11 @@
 解决方案：
 	1、为每一个页面添加控制器，就可以解决该问题。
 	2、为了不显示其他页面的view-title，可以将本页面的title-view设置为空字符串。
+
+
+问题描述：
+  <img src=‘../uploads/banner.png’ />在iPhone手机上无法加载显示图片；
+探索过程：
+	似乎ionic默认的相对路径都是相对于www目录的，也就是说www+src路径，应是绝对路径。
+解决方案：
+	<img src=‘/uploads/banner.png’ />可以正常显示。
