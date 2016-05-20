@@ -26,3 +26,12 @@
 	似乎ionic默认的相对路径都是相对于www目录的，也就是说www+src路径，应是绝对路径。
 解决方案：
 	<img src=‘/uploads/banner.png’ />可以正常显示。
+
+问题描述：
+	主页上面出现了滚动条
+探索过程：
+	首先，考虑是不是cordova的DIsAllowOverscroll，但是发现没有用；
+	其次，考虑是不是ionic得over scroll发现也没有用，
+	最后找到了ionic的scrollbar-y，设置为false生效
+结局方案：
+	使用scrollbar-y属性。https://forum.ionicframework.com/t/solved-how-to-hide-scroll-bar/14330/3
