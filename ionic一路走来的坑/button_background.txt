@@ -35,3 +35,10 @@
 	最后找到了ionic的scrollbar-y，设置为false生效
 结局方案：
 	使用scrollbar-y属性。https://forum.ionicframework.com/t/solved-how-to-hide-scroll-bar/14330/3
+
+问题描述：
+	Cordova/CDVViewController.h file not found in Xcode 7.1 beta
+解决方案：
+	Add this line to your Buildings->Header Search Paths:
+		“$(OBJROOT)/UninstalledProducts/$(PLATFORM)/include”
+https://forum.ionicframework.com/t/cordova-cdvviewcontroller-h-file-not-found-in-xcode-7-1-beta/32232
